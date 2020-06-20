@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/imc"
+            android:icon="@android:drawable/alert_dark_frame"
+            android:title="Calcular Imc" />
+        <item
+            android:id="@+id/convesor"
+            android:icon="@android:drawable/ic_menu_sort_alphabetically"
+            android:title="Conversor de unidades" />
+        <item
+            android:id="@+id/historial"
+            android:icon="@android:drawable/alert_dark_frame"
+            android:title="Historial de resultados" />
+
+    </group>
+</menu>

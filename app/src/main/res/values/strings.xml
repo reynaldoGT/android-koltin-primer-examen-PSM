@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Examen</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="peso">Ingrese su peso en kilogramos</string>
+    <string name="altura">Ingrese su altura en centimetros</string>
+    <string name="btn_calcular">Calcular IMC</string>
+</resources>
