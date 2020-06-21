@@ -4,7 +4,7 @@
     android:layout_width="match_parent" >
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="300dp"
+        android:layout_height="250dp"
         android:src="@drawable/backgroud_drawer"
         android:scaleType="centerCrop"
         android:contentDescription="xd" />

@@ -1,5 +1,6 @@
 package com.dosan.examen.activities
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -54,20 +55,23 @@ class MainActivity : AppCompatActivity() {
 
     fun setToolbar() {
         var toolbar = findViewById<Toolbar>(R.id.toolbar)
+        toolbar.title = "Examen PSN"
+        toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"))
         setSupportActionBar(toolbar)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_home)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            android.R.id.home->{
+        when (item.itemId) {
+            android.R.id.home -> {
                 draweLayout?.openDrawer(GravityCompat.START)
                 return true
             }
         }
         return super.onOptionsItemSelected(item)
     }
+
     // Metodo para cambiar entre fragments
     fun showSelectFrame(fragment: Fragment) {
         supportFragmentManager.beginTransaction().replace(R.id.content_frame, fragment)

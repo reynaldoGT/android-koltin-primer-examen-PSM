@@ -5,4 +5,6 @@
     <string name="peso">Ingrese su peso en kilogramos</string>
     <string name="altura">Ingrese su altura en centimetros</string>
     <string name="btn_calcular">Calcular IMC</string>
+    <string name="btnLimpiar">Limpiar</string>
+    <string name="titulo_metros">Ingrese numero en metros</string>
 </resources>

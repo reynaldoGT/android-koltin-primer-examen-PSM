@@ -1,60 +1,136 @@
 package com.dosan.examen.fragments
 
+import android.content.Context
+import android.icu.text.Transliterator
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import android.widget.*
+import androidx.fragment.app.Fragment
+import com.dosan.examen.Crud.HistorialCrud
 import com.dosan.examen.R
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_conversor.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ConversorFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class ConversorFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class ConversorFragment : Fragment(), View.OnClickListener {
+    var edTextMetros: EditText? = null
+    var spinner: Spinner? = null
+    var btnMetros: Button? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    // para hacer el crud
+    var crud: HistorialCrud? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        edTextMetros = view?.findViewById(R.id.edMetros)
+        edTextMetros?.setText("1")
+        btnMetros = view?.findViewById(R.id.btnConvertir)
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_conversor, container, false)
+        val view = inflater.inflate(R.layout.fragment_conversor, container, false)
+        buttons_functions(view)
+        spinner = view.findViewById(R.id.spinner)
+        var itemsList = arrayOf(
+            "Cm (Centímetros)",
+            "Dm (Decímetros)",
+            "Mm (Milímetros)",
+            "Dm (Decámetros)",
+            "Km (Kilómetros)",
+            "Hm( Hectómetros))"
+        )
+
+        val dataAdapter: ArrayAdapter<String> = ArrayAdapter(
+            view.context,
+            android.R.layout.simple_spinner_item, itemsList
+        )
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_selectable_list_item)
+        spinner?.adapter = dataAdapter
+
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ConversorFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ConversorFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    fun buttons_functions(view: View) {
+        val btnConvertir =
+            view.findViewById(R.id.btnConvertir) as Button
+        btnConvertir.setOnClickListener(this)
+
+    }
+
+    override fun onClick(v: View?) {
+        when (v!!.id) {
+            R.id.btnConvertir -> {
+                val selecction = spinner?.selectedItemPosition
+                //Toast.makeText(context, selecction.toString(), Toast.LENGTH_LONG).show()
+                opciones(selecction!!)
+            }
+        }
+    }
+
+    fun opciones(position: Int) {
+        edTextMetros = view?.findViewById(R.id.edMetros)
+        var resultado = 0.0
+        var mensaje = ""
+        if (edTextMetros?.text!!.isNotEmpty()) {
+            when (position) {
+                0 -> {
+                    resultado = edTextMetros?.text.toString().toDouble() * 100
+                    mensaje =
+                        "${edTextMetros?.text.toString()
+                            .toDouble()} equivale a  $resultado Centimetros"
+                }
+                1 -> {
+                    resultado = edTextMetros?.text.toString().toDouble() / 10
+                    mensaje =
+                        "${edTextMetros?.text.toString()
+                            .toDouble()} equivale a $resultado Decimietros"
+                }
+                2 -> {
+                    resultado = edTextMetros?.text.toString().toDouble() / 1000
+                    mensaje =
+                        "${edTextMetros?.text.toString()
+                            .toDouble()} equivale a $resultado milimetros"
+                }
+                3 -> {
+                    resultado = edTextMetros?.text.toString().toDouble() / 10
+                    mensaje =
+                        "${edTextMetros?.text.toString()
+                            .toDouble()} equivale a $resultado decametros"
+                }
+                4 -> {
+                    resultado = edTextMetros?.text.toString().toDouble() / 1000
+                    mensaje =
+                        "${edTextMetros?.text.toString()
+                            .toDouble()} equivale a $resultado kilometros"
+                }
+                5 -> {
+                    resultado = edTextMetros?.text.toString().toDouble() / 0.5
+                    mensaje =
+                        "${edTextMetros?.text.toString()
+                            .toDouble()} equivale a $resultado hectometros"
                 }
             }
+            hideKeyboard()
+            Snackbar.make(
+                view!!.findViewById(R.id.linearConversor),
+                mensaje,
+                Snackbar.LENGTH_LONG
+            ).show()
+        } else {
+            Toast.makeText(context, "Por favor ingresa un número", Toast.LENGTH_LONG).show()
+        }
+        //Toast.makeText(context, mensaje, Toast.LENGTH_LONG).show()
+    }
+
+    fun hideKeyboard() {
+        val imm =
+            activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view!!.windowToken, 0)
     }
 }

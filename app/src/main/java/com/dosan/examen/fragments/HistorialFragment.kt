@@ -5,29 +5,42 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.dosan.examen.Crud.Historial
+import com.dosan.examen.Crud.HistorialAdapter
+import com.dosan.examen.Crud.HistorialCrud
 import com.dosan.examen.R
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [HistorialFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HistorialFragment : Fragment() {
-
+    var lista: RecyclerView? = null
+    var adaptador: HistorialAdapter? = null
+    var layout_Manager: RecyclerView.LayoutManager? = null
+    var historial: ArrayList<Historial>? = null
+    var crud: HistorialCrud? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view =inflater.inflate(R.layout.fragment_historial, container, false)
+        val view = inflater.inflate(R.layout.fragment_historial, container, false)
 
+        lista = view.findViewById(R.id.lista)
+        lista?.setHasFixedSize(true)
 
+        layout_Manager = LinearLayoutManager(view.context)
+
+        lista?.layoutManager = layout_Manager
+
+        crud = HistorialCrud(view.context)
+
+        historial = crud?.getHistorial()
+
+        adaptador = HistorialAdapter(historial!!)
+
+        lista?.adapter = adaptador
 
         return view
     }
