@@ -87,7 +87,9 @@ class HistorialCrud(context: Context) {
     //Borrar todos los elemetnso de nuestra base de datos
     fun deleteHistorial() {
         val db: SQLiteDatabase = helper?.writableDatabase!!
-        db.execSQL("DELETE FROM " + HistorialContract.Companion.Entrada)
+        db.execSQL("DELETE FROM " + HistorialContract.Companion.Entrada.NOMBRE_TABLA)
+
         db.close()
     }
+
 }

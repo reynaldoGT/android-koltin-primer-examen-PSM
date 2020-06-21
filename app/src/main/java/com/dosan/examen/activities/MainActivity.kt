@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
     fun setToolbar() {
         var toolbar = findViewById<Toolbar>(R.id.toolbar)
-        toolbar.title = "Examen PSN"
+        toolbar.title = "Examen PSM"
         toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"))
         setSupportActionBar(toolbar)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_home)

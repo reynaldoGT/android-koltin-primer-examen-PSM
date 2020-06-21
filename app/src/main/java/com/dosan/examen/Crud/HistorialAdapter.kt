@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.dosan.examen.R
+import com.google.android.material.snackbar.Snackbar
 
 class HistorialAdapter(items: ArrayList<Historial>) :
     RecyclerView.Adapter<HistorialAdapter.ViewHolder>() {
@@ -29,11 +30,10 @@ class HistorialAdapter(items: ArrayList<Historial>) :
 
         val item = items?.get(position)
 
-        holder.peso?.text = item?.peso
-        holder.altura?.text = item?.altura
+        holder.peso?.text = item?.peso +" Kg"
+        holder.altura?.text = item?.altura+ " Cm"
         holder.tipo?.text = item?.tipo
         holder.resultado?.text = item?.resultado
-
 
     }
 
@@ -41,6 +41,13 @@ class HistorialAdapter(items: ArrayList<Historial>) :
         return items?.count()!!
     }
 
+    fun removeItem(viewHolder: RecyclerView.ViewHolder) {
+        items?.removeAt(viewHolder.adapterPosition)
+        //notifyItemRemoved(viewHolder.adapterPosition)
+
+        Snackbar.make(viewHolder.itemView, "Elemento eliminado", Snackbar.LENGTH_LONG).show()
+        notifyItemRemoved(viewHolder.adapterPosition)
+    }
 
     class ViewHolder(
         vista: View

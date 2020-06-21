@@ -57,22 +57,19 @@ class IMC_fragment : Fragment(), View.OnClickListener {
                         .isNotEmpty()
                 ) {
                     val peso = edPeso?.text.toString().toFloat()
-                    var altura = (edAltura?.text.toString().toFloat()).pow(2)
+                    var altura = ((edAltura?.text.toString().toFloat()/100).pow(2))
                     val resultado = peso / altura
                     hideKeyboard()
                     // Agregar a la base de das sqlite
-
                     crud?.newHistory(
                         Historial(
                             0,
                             peso.toString(),
-                            altura.toString(),
+                            edAltura?.text.toString(),
                             resultado.toString(),
                             "IMC"
                         )
                     )
-
-
                     Snackbar.make(
                         view!!.findViewById(R.id.linearIMC),
                         "El IMC es $resultado usted tiene un imc ${bodyStatus(resultado)}",
@@ -86,12 +83,10 @@ class IMC_fragment : Fragment(), View.OnClickListener {
                         Snackbar.LENGTH_LONG
                     ).show()
                 }
-
             }
             R.id.btnLimpiar -> {
                 edAltura?.text?.clear()
                 edPeso?.text?.clear()
-
             }
         }
 

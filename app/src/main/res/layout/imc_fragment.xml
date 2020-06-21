@@ -9,33 +9,47 @@
         android:id="@+id/linearIMC"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="16dp"
         android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:textStyle="bold"
+            android:text="Peso en Kilogramos" />
 
         <EditText
             android:id="@+id/edPeso"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
             android:hint="@string/peso"
+            android:inputType="number"
             android:text="" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:textStyle="bold"
+            android:text="Estatura en Centimetros" />
         <EditText
             android:id="@+id/edAltura"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/altura"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:text="" />
-
-
 
         <Button
             android:id="@+id/btnCalcular"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/btn_calcular" />
+
         <Button
             android:id="@+id/btnLimpiar"
             android:layout_width="match_parent"

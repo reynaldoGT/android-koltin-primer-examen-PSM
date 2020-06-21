@@ -3,7 +3,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/imc"
-            android:icon="@android:drawable/alert_dark_frame"
+            android:icon="@android:drawable/ic_input_add"
             android:title="Calcular Imc" />
         <item
             android:id="@+id/convesor"
@@ -11,7 +11,7 @@
             android:title="Conversor de unidades" />
         <item
             android:id="@+id/historial"
-            android:icon="@android:drawable/alert_dark_frame"
+            android:icon="@android:drawable/ic_menu_recent_history"
             android:title="Historial de resultados" />
 
     </group>
